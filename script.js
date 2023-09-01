@@ -19,6 +19,7 @@ let currentVideo = JSON.parse(localStorage.getItem("SRC"));
 let currentTimeStamp = JSON.parse(localStorage.getItem("TIME"));
 player.currentTime = Number(currentTimeStamp);
 player.setAttribute("src", currentVideo);
+document.querySelector("title").textContent = currentVideo.replace(/.*\//, "");
 
 if (folderPath) {
   folder.setAttribute("data-visible", "true");
@@ -61,6 +62,7 @@ PlayerList.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
     player.setAttribute("src", e.target.getAttribute("href"));
     localStorage.setItem("SRC", JSON.stringify(player.src));
+    document.querySelector("title").textContent = player.src.replace(/.*\//, "");
     handelePlayPause();
   }
   if (e.target.tagName === "I") {
@@ -85,6 +87,7 @@ player.addEventListener("ended", () => {
     player.setAttribute("src", nextURL);
     player.play();
     localStorage.setItem("SRC", JSON.stringify(player.src));
+    document.querySelector("title").textContent = player.src.replace(/.*\//, "");
   }
 });
 // ===================================================================================
